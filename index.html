@@ -1,0 +1,278 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Lost & Found</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="brand">
+        <span class="logo">🔎</span>
+        <div>
+            <h2>CampusFind</h2>
+            <small>Lost & Found Portal</small>
+        </div>
+    </div>
+    <div class="user-info">
+        <span>🎓 Student Portal</span>
+    </div>
+</header>
+
+<div class="layout">
+
+    <aside class="sidebar">
+        <h4>MENU</h4>
+        <button class="nav-btn active" data-page="dashboard">🏠 Dashboard</button>
+        <button class="nav-btn" data-page="lost">📕 Lost Items</button>
+        <button class="nav-btn" data-page="found">📗 Found Items</button>
+        <button class="nav-btn" data-page="report">➕ Report Item</button>
+        <button class="nav-btn" data-page="claims">📩 My Claims</button>
+        <button class="nav-btn" data-page="admin">⚙️ Admin Panel</button>
+
+        <div class="sidebar-footer">
+            <p>Campus Lost & Found</p>
+            <small>Helping students find their belongings.</small>
+        </div>
+    </aside>
+
+    <main class="content">
+
+        <!-- DASHBOARD -->
+        <section id="dashboard" class="page active">
+            <div class="welcome">
+                <div>
+                    <h1>Welcome to CampusFind 👋</h1>
+                    <p>Find what you've lost. Return what you've found.</p>
+                </div>
+                <button class="primary-btn" onclick="showPage('report')">
+                    + Report an Item
+                </button>
+            </div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <span>📕</span>
+                    <h2 id="totalLost">0</h2>
+                    <p>Lost Items</p>
+                </div>
+                <div class="stat-card">
+                    <span>📗</span>
+                    <h2 id="totalFound">0</h2>
+                    <p>Found Items</p>
+                </div>
+                <div class="stat-card">
+                    <span>✅</span>
+                    <h2 id="totalReturned">0</h2>
+                    <p>Returned Items</p>
+                </div>
+                <div class="stat-card">
+                    <span>📩</span>
+                    <h2 id="totalClaims">0</h2>
+                    <p>Pending Claims</p>
+                </div>
+            </div>
+
+            <div class="section-heading">
+                <div>
+                    <h2>Recent Items</h2>
+                    <p>Recently reported campus belongings</p>
+                </div>
+                <button class="text-btn" onclick="showPage('lost')">
+                    View all →
+                </button>
+            </div>
+
+            <div id="recentItems" class="item-grid"></div>
+        </section>
+
+        <!-- LOST ITEMS -->
+        <section id="lost" class="page">
+            <div class="page-heading">
+                <h1>Lost Items 📕</h1>
+                <p>Search for belongings reported missing on campus.</p>
+            </div>
+
+            <div class="search-area">
+                <input type="text" id="lostSearch"
+                    placeholder="Search lost items...">
+                <select id="lostCategory">
+                    <option value="">All Categories</option>
+                    <option>Electronics</option>
+                    <option>Books</option>
+                    <option>Accessories</option>
+                    <option>Documents</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div id="lostItems" class="item-grid"></div>
+        </section>
+
+        <!-- FOUND ITEMS -->
+        <section id="found" class="page">
+            <div class="page-heading">
+                <h1>Found Items 📗</h1>
+                <p>Browse items found by other students.</p>
+            </div>
+
+            <div class="search-area">
+                <input type="text" id="foundSearch"
+                    placeholder="Search found items...">
+                <select id="foundCategory">
+                    <option value="">All Categories</option>
+                    <option>Electronics</option>
+                    <option>Books</option>
+                    <option>Accessories</option>
+                    <option>Documents</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div id="foundItems" class="item-grid"></div>
+        </section>
+
+        <!-- REPORT ITEM -->
+        <section id="report" class="page">
+            <div class="page-heading">
+                <h1>Report an Item ➕</h1>
+                <p>Help the campus community by reporting an item.</p>
+            </div>
+
+            <form id="reportForm" class="form-card">
+                <div class="form-group">
+                    <label>Report Type</label>
+                    <select id="itemType" required>
+                        <option value="Lost">I Lost an Item</option>
+                        <option value="Found">I Found an Item</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Item Name</label>
+                    <input id="itemName" type="text"
+                        placeholder="Example: Black Wallet" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="itemCategory" required>
+                        <option value="">Select Category</option>
+                        <option>Electronics</option>
+                        <option>Books</option>
+                        <option>Accessories</option>
+                        <option>Documents</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Location</label>
+                    <input id="itemLocation" type="text"
+                        placeholder="Example: Library" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Date</label>
+                    <input id="itemDate" type="date" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input id="studentName" type="text"
+                        placeholder="Enter your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input id="studentEmail" type="email"
+                        placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Contact Number</label>
+                    <input id="studentPhone" type="tel"
+                        placeholder="Enter phone number">
+                </div>
+
+                <div class="form-group full">
+                    <label>Description</label>
+                    <textarea id="itemDescription"
+                        placeholder="Describe the item..." required></textarea>
+                </div>
+
+                <div class="form-group full">
+                    <label>Upload Item Image (Optional)</label>
+                    <input id="itemImage" type="file"
+                        accept="image/png,image/jpeg,image/webp">
+                    <small>Maximum image size: 1 MB</small>
+                </div>
+
+                <button type="submit" class="primary-btn full">
+                    Submit Report
+                </button>
+            </form>
+        </section>
+
+        <!-- CLAIMS -->
+        <section id="claims" class="page">
+            <div class="page-heading">
+                <h1>My Claims 📩</h1>
+                <p>Check the status of your item claims.</p>
+            </div>
+            <div id="claimsList"></div>
+        </section>
+
+        <!-- ADMIN PANEL -->
+        <section id="admin" class="page">
+            <div class="page-heading">
+                <h1>Admin Panel ⚙️</h1>
+                <p>Manage reported items and claims.</p>
+            </div>
+
+            <div class="admin-note">
+                Demo administrator panel. For production, add secure
+                administrator authentication on a server.
+            </div>
+
+            <h2>Manage Items</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Type</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminItems"></tbody>
+                </table>
+            </div>
+
+            <h2 class="admin-subtitle">Manage Claims</h2>
+            <div id="adminClaims"></div>
+        </section>
+
+    </main>
+</div>
+
+<!-- ITEM DETAILS MODAL -->
+<div id="detailsModal" class="modal">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeModal()">×</button>
+        <div id="modalBody"></div>
+    </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<footer>
+    <p>© 2026 CampusFind | Campus Lost and Found Management System</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
